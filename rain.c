@@ -1,5 +1,3 @@
-#define __POSIX_C_SOURCE 199309L
-
 #include <time.h>
 #include <ncurses.h>
 #include <stdlib.h>
@@ -7,6 +5,9 @@
 #include <unistd.h>
 #include <wchar.h>
 #include <locale.h>
+
+#define VERTICAL_PADDING 4
+#define HORIZONTAL_PADDING 8
 
 extern int nanosleep(const struct timespec*, struct timespec*);
 
@@ -22,8 +23,8 @@ short COLOR_GREY2 = 10;
 short COLOR_GREY3 = 11;
 short COLOR_GREY4 = 12;
 
-short RAINY_WINDOW_HEIGHT = 52;
-short RAINY_WINDOW_LENGTH = 200;
+short RAINY_WINDOW_HEIGHT;
+short RAINY_WINDOW_LENGTH;
 
 unsigned short phase = 0;
 
@@ -45,6 +46,9 @@ int main(void){
   leaveok(stdscr, FALSE);
   start_color();
   curs_set(0);
+
+	RAINY_WINDOW_HEIGHT = LINES - VERTICAL_PADDING;
+	RAINY_WINDOW_LENGTH = COLS - HORIZONTAL_PADDING;
 
   // init sub window
   short rainyWindowStartY = (LINES - RAINY_WINDOW_HEIGHT) / 2;
