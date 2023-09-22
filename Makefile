@@ -4,3 +4,6 @@ LDFLAGS = -lncurses
 
 rain: rain.o
 rain.o: rain.c
+
+clean:
+	rm rain.o
